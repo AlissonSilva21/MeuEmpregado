@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<head>
+		
+		<title>Incluir Benefício</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/style.css"/>
+		
+	</head>
+
+
+	<body>
+		<f:view>
+		
+		<h:form>
+		
+		<h:panelGroup styleClass="panel dialog-background" id="divDialog" rendered="#{beneficioManagedBean.dialogVisible}">
+			<h:panelGroup class="panel panel-warning dialog-content">
+		   			<h:outputText value="#{beneficioManagedBean.titleDialog}" styleClass="panel-heading" style="width:100%"></h:outputText>
+		   		    <h:panelGroup class="panel-body">
+		   			 	 <h:outputText value="#{beneficioManagedBean.textDialog}"></h:outputText>
+		   			 	 <h:commandButton styleClass="btn btn-primary" value="Sim" action="#{beneficioManagedBean.excluirBeneficioAction}">
+		   			 	 <p:ajax event="click"
+							update="divDialog" process="@all"							
+							/>
+		   		    	 </h:commandButton>
+		   		    	 <h:commandButton styleClass="btn btn-danger" value="Não" action="#{beneficioManagedBean.hideDialog}" >
+		   		    	 	<p:ajax event="click"
+							update="divDialog" process="@all"							
+							/>
+		   		    	 </h:commandButton>
+		   		    </h:panelGroup>
+		  	</h:panelGroup>
+	  	</h:panelGroup>
+		</h:form>
+	  	
+	  	
+		<div class="container" style="width:100%; height:100%; padding: 0 60 0 60">
+			<h3 style="margin-top:30px;color:#337AB7"><b>Incluir Benefício</b></h3>
+			<h4 style="margin-top:30px;color:#337AB7"><b>Novo Benefício</b></h4>
+
+			<h:form>
+				<div class="row">
+					<div class="col-md-2">
+						  <div class="form-group">
+						    <label for="id">ID</label>
+						    <h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0" id="id" value="#{beneficioManagedBean.id}"/>
+						  </div>
+					</div>
+					<div class="col-md-8">
+						  <div class="form-group">
+						    <label for="descricao">DESCRIÇÃO</label>
+						    <h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0" id="descricao" value=""/>
+						  </div>
+					</div>
+					<div class="col-md-2">
+						<h:commandButton styleClass="btn btn-success btn-incluir btn-block disabled" style="margin-top: 25px" value="Incluir" action="#{beneficioManagedBean.incluirBeneficioAction}"/>
+						
+					</div>
+				</div>
+			</h:form>
+			
+			
+			
+			
+			<h4 class="pull-left" style="margin-top:40px; color:#337AB7"><b>Lista de Benefícios</b></h4>
+		
+			<h:form>
+				<h:dataTable styleClass="table table-striped" id="tableBeneficios" var="b" value="#{beneficioManagedBean.listaBeneficios}">
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="ID"/>
+						</f:facet>
+						<h:outputText value="#{b.id}"/>		    	
+					</h:column>    
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Nome"/>
+						</f:facet>
+				    	<h:outputText value="#{b.descricao}"/>
+					</h:column> 
+					<h:column>
+						<h:commandLink value="Editar" action="showCustomer?faces-redirect=true">
+							<f:setPropertyActionListener target="#{beneficioManagedBean.beneficio}" value="#{b}" />
+						</h:commandLink>		    	
+					</h:column> 
+					<h:column>
+						<h:commandLink value="Excluir" action="#{beneficioManagedBean.showDialog}">
+							<f:setPropertyActionListener target="#{beneficioManagedBean.beneficio}" value="#{b}"/>
+							<f:setPropertyActionListener target="#{beneficioManagedBean.titleDialog}" value="O benefício será excluído permanentemente" />
+							<f:setPropertyActionListener target="#{beneficioManagedBean.textDialog}" value="Deseja continuar?" />
+							<p:ajax event="onclick"
+							update="divDialog" process="@all"							
+							/>
+						</h:commandLink>		    	
+					</h:column>    				       
+				</h:dataTable>
+			</h:form>	
+		
+	    </div>
+	    
+	    
+	    </f:view>
+	    <script src="js/scripts.js"></script>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

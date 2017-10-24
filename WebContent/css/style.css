@@ -1,0 +1,30 @@
+.btn-alterar {
+			
+				margin-right: 8px;
+			}
+
+			.btn-lancar {
+				width: 158px;
+				margin-top: 25px;
+			}
+			
+			.dialog-background {
+			
+			background-color: rgba(0,0,0,0.5);
+			width:100%; height: 100%;
+			position:fixed;
+			z-index:999;
+			
+			}
+			
+			.dialog-content {
+			
+			width:500px;
+			height: 200px;
+			position:fixed;
+			left:50%;
+			top: 50%;
+			margin-left:-250px;
+			margin-top:-100px;
+			
+			}
