@@ -43,11 +43,4 @@ public class BeneficioService {
 		return dao.deletar(id);
 	}
 
-
-	public int ultimoID() {
-
-		return dao.ultimoID();
-		
-	}
-
 }

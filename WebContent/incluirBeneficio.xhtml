@@ -7,110 +7,150 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<head>
-		
-		<title>Incluir Benefício</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="css/style.css"/>
-		
-	</head>
+
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Incluir Benefício</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
+</h:head>
 
 
-	<body>
-		<f:view>
-		
-		<h:form>
-		
-		<h:panelGroup styleClass="panel dialog-background" id="divDialog" rendered="#{beneficioManagedBean.dialogVisible}">
-			<h:panelGroup class="panel panel-warning dialog-content">
-		   			<h:outputText value="#{beneficioManagedBean.titleDialog}" styleClass="panel-heading" style="width:100%"></h:outputText>
-		   		    <h:panelGroup class="panel-body">
-		   			 	 <h:outputText value="#{beneficioManagedBean.textDialog}"></h:outputText>
-		   			 	 <h:commandButton styleClass="btn btn-primary" value="Sim" action="#{beneficioManagedBean.excluirBeneficioAction}">
-		   			 	 <p:ajax event="click"
-							update="divDialog" process="@all"							
-							/>
-		   		    	 </h:commandButton>
-		   		    	 <h:commandButton styleClass="btn btn-danger" value="Não" action="#{beneficioManagedBean.hideDialog}" >
-		   		    	 	<p:ajax event="click"
-							update="divDialog" process="@all"							
-							/>
-		   		    	 </h:commandButton>
-		   		    </h:panelGroup>
-		  	</h:panelGroup>
-	  	</h:panelGroup>
+<h:body>
+	<f:view>
+
+
+
+		<h:form id="formDialog">
+
+			<h:panelGroup styleClass="panel dialog-background" id="divDialog"
+				rendered="#{beneficioManagedBean.dialogVisible}">
+				<h:panelGroup class="panel panel-warning dialog-content">
+					<h:outputText value="#{beneficioManagedBean.titleDialog}"
+						styleClass="panel-heading" style="width:100%"></h:outputText>
+					<h:panelGroup class="panel-body">
+						<h:outputText value="#{beneficioManagedBean.textDialog}"></h:outputText>
+						<h:commandButton styleClass="btn btn-primary" value="Sim">
+							<p:ajax event="click"
+								listener="#{beneficioManagedBean.excluirBeneficioAction}"
+								update="@form :formListaBeneficios" />
+						</h:commandButton>
+						<h:commandButton styleClass="btn btn-danger" value="Não">
+							<p:ajax event="click"
+								listener="#{beneficioManagedBean.hideDialog}" update="@form"
+								process="@all" />
+						</h:commandButton>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
 		</h:form>
-	  	
-	  	
-		<div class="container" style="width:100%; height:100%; padding: 0 60 0 60">
-			<h3 style="margin-top:30px;color:#337AB7"><b>Incluir Benefício</b></h3>
-			<h4 style="margin-top:30px;color:#337AB7"><b>Novo Benefício</b></h4>
 
-			<h:form>
-				<div class="row">
-					<div class="col-md-2">
-						  <div class="form-group">
-						    <label for="id">ID</label>
-						    <h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0" id="id" value="#{beneficioManagedBean.id}"/>
-						  </div>
-					</div>
-					<div class="col-md-8">
-						  <div class="form-group">
-						    <label for="descricao">DESCRIÇÃO</label>
-						    <h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0" id="descricao" value=""/>
-						  </div>
-					</div>
-					<div class="col-md-2">
-						<h:commandButton styleClass="btn btn-success btn-incluir btn-block disabled" style="margin-top: 25px" value="Incluir" action="#{beneficioManagedBean.incluirBeneficioAction}"/>
-						
-					</div>
-				</div>
+
+
+
+
+		<div class="container" style="width: 100%; height: 100%;">
+
+			<h3 style="margin-top: 30px; color: #337AB7; margin-left: 43%">
+				<b>Gerenciar Benefícios</b>
+			</h3>
+
+
+			<h4 class="h4-subtitulos">
+				<b>Novo Benefício</b>
+			</h4>
+
+
+			<h:form id="formIncluir" style=" margin-top:-20px;">
+
+				<h:panelGroup class="row">
+					<h:panelGroup class="col-md-10">
+						<h:panelGroup class="form-group">
+							<label for="descricao">DESCRIÇÃO</label>
+							<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+								id="descricao" value="#{beneficioManagedBean.descricao}">
+								<f:ajax event="keyup"
+									listener="#{beneficioManagedBean.validaCampoAction}"
+									render="btnIncluir" />
+							</h:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup class="col-md-2">
+						<h:commandButton
+							styleClass="btn btn-success btn-incluir btn-block"
+							style="margin-top: 25px"
+							disabled="#{beneficioManagedBean.buttonBlock}"
+							value="#{beneficioManagedBean.valueButton}" id="btnIncluir"
+							action="#{beneficioManagedBean.incluirBeneficioAction}">
+							<f:ajax render="@form formListaBeneficios" resetValues="true" />
+						</h:commandButton>
+					</h:panelGroup>
+				</h:panelGroup>
 			</h:form>
-			
-			
-			
-			
-			<h4 class="pull-left" style="margin-top:40px; color:#337AB7"><b>Lista de Benefícios</b></h4>
-		
-			<h:form>
-				<h:dataTable styleClass="table table-striped" id="tableBeneficios" var="b" value="#{beneficioManagedBean.listaBeneficios}">
+
+
+
+
+
+
+
+			<h:form id="formListaBeneficios">
+				<h4 class="h4-subtitulos">
+					<b>Lista de Benefícios</b>
+				</h4>
+				<h:dataTable styleClass="table table-striped" id="tableBeneficios"
+					var="b" value="#{beneficioManagedBean.listaBeneficios}"
+					style="margin-left: 15px; margin-right: 15px;">
 					<h:column>
 						<f:facet name="header">
-							<h:outputLabel value="ID"/>
+							<h:outputLabel value="ID" />
 						</f:facet>
-						<h:outputText value="#{b.id}"/>		    	
-					</h:column>    
+						<h:outputText value="#{b.id}" />
+					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputLabel value="Nome"/>
+							<h:outputLabel value="Nome" />
 						</f:facet>
-				    	<h:outputText value="#{b.descricao}"/>
-					</h:column> 
+						<h:outputText value="#{b.descricao}" />
+					</h:column>
 					<h:column>
-						<h:commandLink value="Editar" action="showCustomer?faces-redirect=true">
-							<f:setPropertyActionListener target="#{beneficioManagedBean.beneficio}" value="#{b}" />
-						</h:commandLink>		    	
-					</h:column> 
+						<h:commandLink value="Editar"
+							action="#{beneficioManagedBean.editandoBeneficioAction}">
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.beneficio}" value="#{b}" />
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.descricao}"
+								value="#{b.descricao}" />
+						</h:commandLink>
+					</h:column>
 					<h:column>
-						<h:commandLink value="Excluir" action="#{beneficioManagedBean.showDialog}">
-							<f:setPropertyActionListener target="#{beneficioManagedBean.beneficio}" value="#{b}"/>
-							<f:setPropertyActionListener target="#{beneficioManagedBean.titleDialog}" value="O benefício será excluído permanentemente" />
-							<f:setPropertyActionListener target="#{beneficioManagedBean.textDialog}" value="Deseja continuar?" />
-							<p:ajax event="onclick"
-							update="divDialog" process="@all"							
-							/>
-						</h:commandLink>		    	
-					</h:column>    				       
+						<h:commandLink value="Excluir"
+							action="#{beneficioManagedBean.showDialog}">
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.beneficio}" value="#{b}" />
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.titleDialog}"
+								value="O benefício será excluído permanentemente" />
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.textDialog}"
+								value="Deseja continuar?" />
+						</h:commandLink>
+					</h:column>
 				</h:dataTable>
-			</h:form>	
-		
-	    </div>
-	    
-	    
-	    </f:view>
-	    <script src="js/scripts.js"></script>
-		<script src="js/jquery-3.2.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</body>
+			</h:form>
+
+		</div>
+
+
+	</f:view>
+	<script src="js/scripts.js"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</h:body>
 </html>

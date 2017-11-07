@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Benefícios Padrões</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+
+<h:body>
+	<h:panelGroup class="container">
+		<h3 style="margin-top: 30px; color: #337AB7">
+			<b>Benefícios Padrões</b>
+		</h3>
+		<h4 style="margin-top: 30px; color: #337AB7">
+			<b>Funcionário</b>
+		</h4>
+
+		<h:form>
+			<h:panelGroup class="row">
+				<h:panelGroup class="col-md-4">
+					<h:panelGroup class="form-group">
+						<label for="funcionario">Nome</label>
+						<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+							id="funcionario" value="Alisson Silva" readonly="true" />
+					</h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup class="col-md-4">
+					<h:panelGroup class="form-group">
+						<label for="id">ID</label>
+						<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+							id="id" placeholder="ID" value="87964" readonly="true" />
+					</h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup class="col-md-4">
+					<h:panelGroup class="form-group">
+						<label for="cpf">CPF</label>
+						<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+							id="cpf" placeholder="CPF" value="400.200.100-50" readonly="true" />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+
+			<h4 style="margin-top: 30px; color: #337AB7">
+				<b>Incluir Novo Benefício Padrão</b>
+			</h4>
+			<h:panelGroup class="row">
+
+
+				<h:panelGroup class="col-md-6">
+
+					<h:selectOneMenu styleClass="form-control" id="cmbBeneficio"
+						value="#{beneficioPadraoManagedBean.beneficio}">
+						<label for="beneficio">Selecione o benefício</label>
+						<f:selectItems
+							value="#{beneficioPadraoManagedBean.listaBeneficios}" var="b"
+							itemValue="b" itemLabel="#{b.descricao}" />
+					</h:selectOneMenu>
+
+				</h:panelGroup>
+
+
+
+				<h:panelGroup class="col-md-4">
+					<h:panelGroup class="form-group">
+						<label for="valor">Valor R$</label>
+						<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+							id="valor" placeholder="Valor"
+							value="#{beneficioPadraoManagedBean.valorAux}">
+							<f:ajax event="keyup"
+								listener="#{beneficioPadraoManagedBean.editarValor(0)}"
+								render="valor" />
+						</h:inputText>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+
+
+
+			<h:panelGroup class="row">
+				<h:panelGroup class="col-md-4">
+
+
+
+
+					<h:selectOneMenu styleClass="form-control" id="cmbPeriodo"
+						value="#{beneficioPadraoManagedBean.periodo}">
+						<label for="beneficio">Período</label>
+						<f:selectItems value="#{beneficioPadraoManagedBean.listaPeriodos}"
+							var="p" itemValue="p" itemLabel="#{p.descricao}" />
+					</h:selectOneMenu>
+
+				</h:panelGroup>
+
+				<h:panelGroup class="col-md-4">
+					<h:panelGroup class="form-group">
+						<label for="desconto">Desconto</label>
+						<h:panelGroup class="input-group">
+
+
+							<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+								id="descricao"
+								value="#{beneficioPadraoManagedBean.valorDescAux}">
+								<f:ajax event="keyup"
+									listener="#{beneficioPadraoManagedBean.editarValor(1)}"
+									render="descricao" />
+							</h:inputText>
+
+
+							<h:panelGroup class="input-group-btn">
+
+
+
+								<h:selectOneMenu style="width:80px" styleClass="form-control"
+									id="cmbDesconto"
+									value="#{beneficioPadraoManagedBean.descontoBeneficio.id}">
+									<f:selectItem itemValue="0" itemLabel="R$" />
+									<f:selectItem itemValue="1" itemLabel="%" />
+									<f:ajax event="change"
+										listener="#{beneficioPadraoManagedBean.editarValor(1)}"
+										render="cmbDesconto descricao" />
+								</h:selectOneMenu>
+
+
+							</h:panelGroup>
+							<!-- /btn-group -->
+						</h:panelGroup>
+						<!-- /input-group -->
+					</h:panelGroup>
+				</h:panelGroup>
+
+
+				<h:panelGroup class="col-md-2">
+					<h:commandButton styleClass="btn btn-success btn-incluir btn-block"
+						style="margin-top: 25px" value="Incluir" />
+				</h:panelGroup>
+
+
+
+
+			</h:panelGroup>
+		</h:form>
+
+
+		<h4 class="pull-left" style="margin-top: 40px; color: #337AB7">
+			<b>Lista de Benefícios Padrão</b>
+		</h4>
+		
+		
+		
+		
+		
+		<h:form id="formListaBeneficios">
+				<h4 class="h4-subtitulos">
+					<b>Lista de Benefícios Padrão</b>
+				</h4>
+				<h:dataTable styleClass="table table-striped" id="tableBeneficiosPadrao"
+					var="b" value="#{beneficioPadraoManagedBean.listaBeneficiosPadrao}"
+					style="margin-left: 15px; margin-right: 15px;">
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="ID" />
+						</f:facet>
+						<h:outputText value="#{b.id}" />
+					</h:column>
+					
+					
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Descrição" />
+						</f:facet>
+						<h:outputText value="#{b.beneficio.descricao}" />
+					</h:column>
+					
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Desc %" />
+						</f:facet>
+						<h:outputText value="#{b.descPorCento}" />
+					</h:column>
+					
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Desc R$" />
+						</f:facet>
+						<h:outputText value="#{b.descReal}" />
+					</h:column>
+					
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Valor R$" />
+						</f:facet>
+						<h:outputText value="#{b.valorBeneficio}" />
+					</h:column>
+					
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputLabel value="Período" />
+						</f:facet>
+						<h:outputText value="#{b.beneficioPeriodo.descricao}" />
+					</h:column>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<h:column>
+						<h:commandLink value="Editar"
+							action="#{beneficioManagedBean.editandoBeneficioAction}">
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.beneficio}" value="#{b}" />
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.descricao}"
+								value="#{b.descricao}" />
+						</h:commandLink>
+					</h:column>
+					<h:column>
+						<h:commandLink value="Excluir"
+							action="#{beneficioManagedBean.showDialog}">
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.beneficio}" value="#{b}" />
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.titleDialog}"
+								value="O benefício será excluído permanentemente" />
+							<f:setPropertyActionListener
+								target="#{beneficioManagedBean.textDialog}"
+								value="Deseja continuar?" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		
+		
+		
+		
+		
+		
+		<h:panelGroup class="row">
+			<h:panelGroup class="col-md-12">
+				<table class="table table-striped table-bordered table-hover"
+					id="tabelaBeneficioPadrao">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Descrição</th>
+							<th>Desc %</th>
+							<th>Desc R$</th>
+							<th>Valor R$</th>
+							<th>Período</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Vale Alimentação</td>
+							<td>0</td>
+							<td>0</td>
+							<td>100,00</td>
+							<td>Mensal</td>
+						</tr>
+
+						<tr>
+							<th scope="row">2</th>
+							<td>Vale Transporte</td>
+							<td>0</td>
+							<td>0</td>
+							<td>90,00</td>
+							<td>Mensal</td>
+						</tr>
+					</tbody>
+				</table>
+			</h:panelGroup>
+		</h:panelGroup>
+
+
+
+	</h:panelGroup>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/scripts.js"></script>
+</h:body>
+</html>
