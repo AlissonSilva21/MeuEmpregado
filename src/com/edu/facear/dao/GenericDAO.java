@@ -3,29 +3,22 @@ package com.edu.facear.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import com.edu.facear.util.ConnectDB;
 
 
-
-
-
 public class GenericDAO {
-	private ConnectDB db = new ConnectDB();
-	protected Connection connect;
+	private static EntityManagerFactory emf =
+			Persistence.createEntityManagerFactory("TrabalhoArquitetura");
 	
-	public void openConnection() throws ClassNotFoundException, SQLException {
-		connect = db.getConnection();
+	private GenericDAO(){
+		
 	}
-	
-	public void closeConnection() {
-		if(connect!=null) {
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+
+	public static EntityManagerFactory getInstance() {
+		return emf;
 	}
 	
 }

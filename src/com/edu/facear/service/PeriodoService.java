@@ -20,9 +20,8 @@ public class PeriodoService {
 
 	public List<Periodo> listar () {
 		
-		return dao.listar();
+		return null;//dao.listar();
 	}
-	
 
 
 }
