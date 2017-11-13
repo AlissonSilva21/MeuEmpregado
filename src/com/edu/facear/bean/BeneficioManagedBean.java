@@ -1,4 +1,4 @@
-package com.edu.facear.bean;
+	package com.edu.facear.bean;
 
 import java.io.Serializable;
 import java.util.List;

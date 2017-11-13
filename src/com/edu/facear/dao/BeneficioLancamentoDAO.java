@@ -21,10 +21,10 @@ import com.mysql.jdbc.Statement;
 
 
 public class BeneficioLancamentoDAO{
-	EntityManagerFactory emf = GenericDAO.getInstance();
+	EntityManagerFactory emf = Conexao.getInstance();
 	
 	public List<BeneficioLancamento> listar() {
-		EntityManager em = GenericDAO.getInstance().createEntityManager();
+		EntityManager em = Conexao.getInstance().createEntityManager();
 		return em.createQuery("FROM " + BeneficioLancamento.class.getName()).getResultList();
 	}
 	
@@ -59,5 +59,12 @@ public class BeneficioLancamentoDAO{
         em.getTransaction().commit();
 		return true;
 	}
-
+	public int proxId(){
+		int id;
+		EntityManager em = Conexao.getInstance().createEntityManager();
+		ArrayList<BeneficioLancamento> lista=new ArrayList<BeneficioLancamento>();
+		lista.addAll(em.createQuery("FROM " + BeneficioLancamento.class.getName()).getResultList());
+		id=lista.get(lista.size()-1).getId()+1;
+		return id;
+	}
 }

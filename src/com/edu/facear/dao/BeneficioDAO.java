@@ -1,9 +1,6 @@
 package com.edu.facear.dao;
 
-import java.sql.PreparedStatement;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +11,10 @@ import com.edu.facear.model.Beneficio;
 
 
 public class BeneficioDAO{
-	private PreparedStatement ps;
-	EntityManagerFactory emf = GenericDAO.getInstance();
+	EntityManagerFactory emf = Conexao.getInstance();
 	
 	public List<Beneficio> listar() {
-		EntityManager em = GenericDAO.getInstance().createEntityManager();
+		EntityManager em = Conexao.getInstance().createEntityManager();
 		return em.createQuery("FROM " + Beneficio.class.getName()).getResultList();
 	}
 	public boolean deletar(Integer id) {
@@ -34,21 +30,30 @@ public class BeneficioDAO{
 
 	public boolean cadastrar(Beneficio beneficio) {
 		EntityManager em = emf.createEntityManager();
-		
 		em.getTransaction().begin();
 		em.persist(beneficio);
 		em.getTransaction().commit();
-		
 		em.close();
-		return true; 
+		return true;
 	}
 
 	public boolean atualizar(Beneficio beneficio) {
+		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
         em.merge(beneficio);
         em.getTransaction().commit();
+      
 		return true;
 	}
+	public int proxId(){
+		int id;
+		EntityManager em = Conexao.getInstance().createEntityManager();
+		ArrayList<Beneficio> lista=new ArrayList<Beneficio>();
+		lista.addAll(em.createQuery("FROM " + Beneficio.class.getName()).getResultList());
+		id=lista.get(lista.size()-1).getId()+1;
+		return id;
+	}
+	
 
 }

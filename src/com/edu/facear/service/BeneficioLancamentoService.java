@@ -21,17 +21,17 @@ public class BeneficioLancamentoService {
 	}
 	
 	
-	public boolean cadastrar (Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao) {		
+	public boolean cadastrar (Date data, ArrayList<BeneficioPadrao> beneficiosPadrao,boolean status) {		
 		
-		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, beneficiosPadrao);
+		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(data, beneficiosPadrao,status);
 				
 		return dao.cadastrar(beneficioLancamento);
 	}
 	
 	
-	public boolean atualizar (Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao) {		
+	public boolean atualizar (Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao,boolean status) {		
 		
-		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, beneficiosPadrao);
+		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, beneficiosPadrao,status);
 				
 		return dao.atualizar(beneficioLancamento);
 	}
@@ -46,6 +46,11 @@ public class BeneficioLancamentoService {
 	public boolean deletar (Integer id) {
 			
 		return dao.deletar(id);
+	}
+	public int proxId(){
+		int id;
+		id=dao.proxId();
+		return id;
 	}
 
 }

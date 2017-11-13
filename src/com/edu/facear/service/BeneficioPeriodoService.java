@@ -44,5 +44,10 @@ public class BeneficioPeriodoService {
 			
 		return dao.deletar(id);
 	}
+	public int proxId(){
+		int id;
+		id=dao.proxId();
+		return id;
+	}
 
 }

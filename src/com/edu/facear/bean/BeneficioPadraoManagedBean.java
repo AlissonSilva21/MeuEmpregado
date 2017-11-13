@@ -7,11 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.edu.facear.model.Beneficio;
-import com.edu.facear.model.DescontoBeneficio;
-import com.edu.facear.model.Periodo;
 import com.edu.facear.service.BeneficioPadraoService;
 import com.edu.facear.service.BeneficioService;
-import com.edu.facear.service.PeriodoService;
 
 @ManagedBean(name = "beneficioPadraoManagedBean")
 @SessionScoped
@@ -29,13 +26,6 @@ public class BeneficioPadraoManagedBean implements Serializable {
 
 	private BeneficioPadraoService beneficioPadraoService;
 
-	private List<Periodo> listaPeriodos;
-
-	private PeriodoService periodoService;
-
-	private Periodo periodo;
-
-	private DescontoBeneficio descontoBeneficio = new DescontoBeneficio();
 
 	private String valorAux = "0,00";
 
@@ -47,10 +37,6 @@ public class BeneficioPadraoManagedBean implements Serializable {
 		listaBeneficios = beneficioService.listar();
 
 		beneficio = listaBeneficios.get(0);
-
-		periodoService = new PeriodoService();
-
-		listaPeriodos = periodoService.listar();
 
 	}
 
@@ -86,37 +72,7 @@ public class BeneficioPadraoManagedBean implements Serializable {
 		this.beneficio = beneficio;
 	}
 
-	public List<Periodo> getListaPeriodos() {
-		return listaPeriodos;
-	}
-
-	public void setListaPeriodos(List<Periodo> listaPeriodos) {
-		this.listaPeriodos = listaPeriodos;
-	}
-
-	public PeriodoService getPeriodoService() {
-		return periodoService;
-	}
-
-	public void setPeriodoService(PeriodoService periodoService) {
-		this.periodoService = periodoService;
-	}
-
-	public Periodo getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(Periodo periodo) {
-		this.periodo = periodo;
-	}
-
-	public DescontoBeneficio getDescontoBeneficio() {
-		return descontoBeneficio;
-	}
-
-	public void setDescontoBeneficio(DescontoBeneficio descontoBeneficio) {
-		this.descontoBeneficio = descontoBeneficio;
-	}
+	
 
 	public String getValorAux() {
 		return valorAux;
@@ -173,18 +129,6 @@ public class BeneficioPadraoManagedBean implements Serializable {
 				palavra = palavra.substring(0, palavra.length() - 6) + "." + palavra.substring(palavra.length() - 6);
 			}
 			
-			
-
-			if (descontoBeneficio.getId() != 0) {
-				palavra = palavra.replaceAll(",", ".");
-
-				if (Float.parseFloat(palavra) > 100) {
-
-					palavra = "100.00";
-
-				}
-
-			}
 
 			valorDescAux = palavra;
 

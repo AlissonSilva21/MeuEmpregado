@@ -1,6 +1,5 @@
 package com.edu.facear.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +11,6 @@ import javax.persistence.Table;
 public class Beneficio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id",unique=true,nullable=false)
 	private Integer id;
 	private String descricao;
 	
@@ -21,8 +19,12 @@ public class Beneficio {
 	public Beneficio(Integer id){
 		this.id=id;
 	}
+	public Beneficio(){}
 	public Beneficio(Integer id, String descricao) {
 		this.id = id;
+		this.descricao = descricao;
+	}
+	public Beneficio(String descricao){
 		this.descricao = descricao;
 	}
 	

@@ -11,14 +11,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import com.edu.facear.model.Beneficio;
-import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPeriodo;
 
+
 public class BeneficioPeriodoDAO{
-	EntityManagerFactory emf = GenericDAO.getInstance();
+	EntityManagerFactory emf = Conexao.getInstance();
 
 	public List<BeneficioPeriodo> listar() {
-		EntityManager em = GenericDAO.getInstance().createEntityManager();
+		EntityManager em = Conexao.getInstance().createEntityManager();
 		return em.createQuery("FROM " + BeneficioPeriodo.class.getName()).getResultList();
 	}
 	
@@ -51,6 +51,14 @@ public class BeneficioPeriodoDAO{
         em.merge(beneficioPeriodo);
         em.getTransaction().commit();
 		return true;
+	}
+	public int proxId(){
+		int id;
+		EntityManager em = Conexao.getInstance().createEntityManager();
+		ArrayList<BeneficioPeriodo> lista=new ArrayList<BeneficioPeriodo>();
+		lista.addAll(em.createQuery("FROM " + BeneficioPeriodo.class.getName()).getResultList());
+		id=lista.get(lista.size()-1).getId()+1;
+		return id;
 	}
 
 }

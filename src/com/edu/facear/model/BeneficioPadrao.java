@@ -2,10 +2,12 @@ package com.edu.facear.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,23 +24,42 @@ public class BeneficioPadrao {
 	private Integer id;
 	private double descReal,valorBeneficio;
 	private float descPorCento;
-	//private Funcionario funcionario;
 	
 	@OneToOne
-	private Beneficio beneficio;
-	@OneToMany
+	@JoinColumn(name="idEmpregado")
+	private Empregado empregado;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idBeneficioPeriodo")
 	private BeneficioPeriodo beneficioPeriodo;
+	
+	@OneToOne
+	@JoinColumn(name="idBeneficio")
+	private Beneficio beneficio;
+	
+	public BeneficioPadrao(){}
 	
 	public BeneficioPadrao(Integer id){
 		this.id=id;
 	}
-	public BeneficioPadrao(Beneficio beneficio, Integer id, double descReal, double valorBeneficio, float descPorCento, BeneficioPeriodo beneficioPeriodo) {		
+	
+	public BeneficioPadrao(double descReal, double valorBeneficio, float descPorCento, BeneficioPeriodo beneficioPeriodo,Beneficio beneficio,Empregado empregado) {		
+		this.beneficio = beneficio;
+		this.descReal = descReal;
+		this.valorBeneficio = valorBeneficio;
+		this.descPorCento = descPorCento;
+		this.beneficioPeriodo = beneficioPeriodo;
+		this.empregado=empregado;
+	}
+	
+	public BeneficioPadrao(Integer id, double descReal, double valorBeneficio, float descPorCento, BeneficioPeriodo beneficioPeriodo,Beneficio beneficio,Empregado empregado) {		
 		this.beneficio = beneficio;
 		this.id = id;
 		this.descReal = descReal;
 		this.valorBeneficio = valorBeneficio;
 		this.descPorCento = descPorCento;
 		this.beneficioPeriodo = beneficioPeriodo;
+		this.empregado=empregado;
 	}
 	
 	public Beneficio getBeneficio() {
@@ -78,6 +99,11 @@ public class BeneficioPadrao {
 		this.beneficioPeriodo = beneficioPeriodo;
 	}
 	
-	
+	public Empregado getEmpregado() {
+		return empregado;
+	}
+	public void setEmpregado(Empregado empregado) {
+		this.empregado = empregado;
+	}
 
 }

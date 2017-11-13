@@ -2,6 +2,7 @@ package com.edu.facear.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -9,7 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,14 +25,30 @@ public class BeneficioLancamento {
 	private Integer id;
 	private Date data;
 	
-	@ManyToOne
+	@OneToOne
+	@JoinColumn(name="idEmpregado")
 	private Empregado empregado;
-	@Column
-	@ElementCollection(targetClass=BeneficioPadrao.class)
-	private ArrayList<BeneficioPadrao> beneficiosPadrao;
 	
-	
+	@OneToMany
+	@JoinColumn(name = "id")
+	private List<BeneficioPadrao> beneficioPadrao=new ArrayList<BeneficioPadrao>();
 	private boolean status;
+	
+	public BeneficioLancamento(){}
+	
+	public BeneficioLancamento(Date data, ArrayList<BeneficioPadrao> beneficiosPadrao, boolean status) {
+		this.data = data;
+		this.beneficioPadrao = beneficiosPadrao;
+		this.status=status;
+	}
+	
+	public BeneficioLancamento(Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao, boolean status) {
+		this.id = id;
+		this.data = data;
+		this.beneficioPadrao = beneficiosPadrao;
+		this.status=status;
+	}
+	
 	
 	public boolean isStatus() {
 		return status;
@@ -38,12 +58,6 @@ public class BeneficioLancamento {
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
-	}
-
-	public BeneficioLancamento(Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao) {
-		this.id = id;
-		this.data = data;
-		this.beneficiosPadrao = beneficiosPadrao;
 	}
 	
 	public Integer getId() {
@@ -58,10 +72,10 @@ public class BeneficioLancamento {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	public ArrayList<BeneficioPadrao> getBeneficiosPadrao() {
-		return beneficiosPadrao;
+	public List<BeneficioPadrao> getBeneficiosPadrao() {
+		return beneficioPadrao;
 	}
 	public void setBeneficios(ArrayList<BeneficioPadrao> beneficiosPadrao) {
-		this.beneficiosPadrao = beneficiosPadrao;
+		this.beneficioPadrao = beneficiosPadrao;
 	}
 }
