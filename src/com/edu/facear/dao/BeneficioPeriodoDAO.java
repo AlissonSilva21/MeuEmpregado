@@ -19,7 +19,7 @@ public class BeneficioPeriodoDAO{
 
 	public List<BeneficioPeriodo> listar() {
 		EntityManager em = Conexao.getInstance().createEntityManager();
-		return em.createQuery("FROM " + BeneficioPeriodo.class.getName()).getResultList();
+		return em.createQuery("FROM BENEFICIOPERIODO").getResultList();
 	}
 	
 
