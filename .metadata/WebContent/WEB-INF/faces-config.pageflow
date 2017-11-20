@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf151069607490010" configfile="/MeuEmpregado/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf151069607490010" configfile="/MeuEmpregado/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="realizarLancamento.xhtml" x="554" y="178" id="pf151070249588711" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15111256064630" path="realizarLancamento.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="inicioBeneficio" x="122" y="178" id="pf151070249589113" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="inicioBeneficio.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="inicioBeneficio.xhtml" x="338" y="562" id="pf15111256064641" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf15111256064642 pf15111256064630 pf15111256064643 pf15111256064644" inlinks="pf15111256064645 pf15111256064646" path="inicioBeneficio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="definirBeneficioPadrao.xhtml" x="122" y="562" id="pf15111256064647" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf15111256064645" inlinks="pf15111256064642" path="definirBeneficioPadrao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="visualizarLancamentos.xhtml" x="554" y="562" id="pf15111256064658" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15111256064643" path="visualizarLancamentos.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="incluirBeneficio.xhtml" x="554" y="946" id="pf15111256064659" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf15111256064644" path="incluirBeneficio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="incluirBeneficioPadrao.xhtml" x="122" y="946" id="pf151112560646510" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf15111256064646" path="incluirBeneficioPadrao.xhtml"/>
+  <links id="pf15111256064642" target="pf15111256064647" source="pf15111256064641" outcome="definirBeneficioPadrao" redirect="true"/>
+  <links id="pf15111256064630" target="pf151070249588711" source="pf15111256064641" outcome="realizarLancamento" redirect="true"/>
+  <links id="pf15111256064643" target="pf15111256064658" source="pf15111256064641" outcome="visualizarLancamentos" redirect="true"/>
+  <links id="pf15111256064644" target="pf15111256064659" source="pf15111256064641" outcome="incluirBeneficio" redirect="true"/>
+  <links id="pf15111256064645" target="pf15111256064641" source="pf15111256064647" outcome="inicioBeneficio" redirect="true"/>
+  <links id="pf15111256064646" target="pf15111256064641" source="pf151112560646510" outcome="inicioBeneficio" redirect="true"/>
+</pageflow:Pageflow>

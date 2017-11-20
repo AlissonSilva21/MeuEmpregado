@@ -193,9 +193,13 @@ public class Empregado {
 		this.uf = uf;
 		this.sexo = sexo;
 	}
+	public Empregado(Integer id){
+		this.id=id;
+	}
 	
 	public Empregado() {
 		
 	}
+	
 		
 }

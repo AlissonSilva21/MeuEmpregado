@@ -1,4 +1,4 @@
-	package com.edu.facear.bean;
+package com.edu.facear.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.edu.facear.model.Beneficio;
+import com.edu.facear.model.Empregador;
 import com.edu.facear.service.BeneficioService;
+import com.edu.facear.service.LoginService;
 
 @ManagedBean(name = "beneficioManagedBean")
 @SessionScoped
@@ -20,26 +22,30 @@ public class BeneficioManagedBean implements Serializable {
 	private BeneficioService beneficioService;
 
 	private Beneficio beneficio;
+	
 
 	private boolean dialogVisible = false;
 
-	private String titleDialog = "Oloco bisho";
+	private String titleDialog = "Excluir";
 
-	private String textDialog = "Oloco bisho";
-
-	private int id;
-
+	private String textDialog = "Excluir";
+	
 	private boolean buttonBlock = true;
+	
+	private int id;
 
 	private String descricao = "";
 
 	private String valueButton = "Incluir";
-
+	private Empregador empregador;
+	private LoginService login;
+	
 	public BeneficioManagedBean() {
 
 		beneficioService = new BeneficioService();
 		listaBeneficios = beneficioService.listar();
-
+		//empregador = new Empregador(login.getIdEmpregadorlogin());
+		empregador = new Empregador(1);
 	}
 
 	public void excluirBeneficioAction() {
@@ -58,12 +64,10 @@ public class BeneficioManagedBean implements Serializable {
 
 	public void incluirBeneficioAction() {
 
+		System.out.println(empregador.getId());
 		if (valueButton.equals("Incluir")) {
-			if (beneficioService.cadastrar(0, descricao)) {
-				titleDialog = "Novo benefício criado com sucesso";
-				textDialog = "";
-				descricao = "";
-				buttonBlock = true;
+			if (beneficioService.cadastrar(descricao, empregador)) {
+				descricao="";
 				atualizarLista();
 
 			} else {
@@ -72,13 +76,10 @@ public class BeneficioManagedBean implements Serializable {
 			}
 		}
 		else {
-			if (beneficioService.atualizar(beneficio.getId(), descricao)) {
-				titleDialog = "Benefício atualizado com sucesso";
-				textDialog = "";
-				descricao = "";
-				valueButton = "Incluir";
-				buttonBlock = true;
-				dialogVisible = true;
+
+			System.out.println(empregador.getId());
+			if (beneficioService.atualizar(beneficio.getId(), descricao,empregador)) {
+				descricao="";
 				atualizarLista();
 
 			} else {
@@ -108,7 +109,6 @@ public class BeneficioManagedBean implements Serializable {
 		listaBeneficios.remove(beneficio);
 		validaCampoAction();
 	}
-
 	public void showDialog() {
 		dialogVisible = true;
 	}

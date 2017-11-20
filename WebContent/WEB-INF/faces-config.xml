@@ -1,8 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
 
+	<navigation-rule>
+		<from-view-id>inicioBeneficio.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>definirBeneficioPadrao</from-outcome>
+			<to-view-id>definirBeneficioPadrao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>inicioBeneficio.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>realizarLancamento</from-outcome>
+			<to-view-id>realizarLancamento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>inicioBeneficio.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>visualizarLancamentos</from-outcome>
+			<to-view-id>visualizarLancamentos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>inicioBeneficio.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>incluirBeneficio</from-outcome>
+			<to-view-id>incluirBeneficio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>definirBeneficioPadrao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>inicioBeneficio</from-outcome>
+			<to-view-id>inicioBeneficio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>incluirBeneficioPadrao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>inicioBeneficio</from-outcome>
+			<to-view-id>inicioBeneficio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
 </faces-config>

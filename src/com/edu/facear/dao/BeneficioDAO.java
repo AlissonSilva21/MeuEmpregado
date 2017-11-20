@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 import com.edu.facear.model.Beneficio;
 
@@ -14,8 +15,9 @@ public class BeneficioDAO{
 	EntityManagerFactory emf = Conexao.getInstance();
 	
 	public List<Beneficio> listar() {
-		EntityManager em = Conexao.getInstance().createEntityManager();
-		return em.createQuery("FROM " + Beneficio.class.getName()).getResultList();
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("from Beneficio");
+		return q.getResultList();
 	}
 	public boolean deletar(Integer id) {
 		EntityManager em = emf.createEntityManager();

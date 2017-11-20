@@ -12,15 +12,15 @@ import com.edu.facear.model.Beneficio;
 import com.edu.facear.model.BeneficioLancado;
 import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPeriodo;
+import com.edu.facear.model.Empregado;
 
 
 public class BeneficioLancadoDAO {
 	EntityManagerFactory emf = Conexao.getInstance();
 	public List<BeneficioLancado> listar() {
-		EntityManager em = Conexao.getInstance().createEntityManager();
-		return em.createQuery("FROM "+BeneficioLancado.class.getName()).getResultList();
-		
-		
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("from BeneficioLancado");
+		return q.getResultList();
 	}
 	public boolean deletar(Integer id) {
 		EntityManager em = emf.createEntityManager();

@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 import com.edu.facear.model.Beneficio;
+import com.edu.facear.model.BeneficioPadrao;
 import com.edu.facear.model.BeneficioPeriodo;
 
 
@@ -18,8 +20,9 @@ public class BeneficioPeriodoDAO{
 	EntityManagerFactory emf = Conexao.getInstance();
 
 	public List<BeneficioPeriodo> listar() {
-		EntityManager em = Conexao.getInstance().createEntityManager();
-		return em.createQuery("FROM BENEFICIOPERIODO").getResultList();
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("from BeneficioPeriodo");
+		return q.getResultList();
 	}
 	
 

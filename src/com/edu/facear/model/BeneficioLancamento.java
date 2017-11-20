@@ -29,23 +29,18 @@ public class BeneficioLancamento {
 	@JoinColumn(name="idEmpregado")
 	private Empregado empregado;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
-	private List<BeneficioPadrao> beneficioPadrao=new ArrayList<BeneficioPadrao>();
 	private boolean status;
 	
 	public BeneficioLancamento(){}
 	
-	public BeneficioLancamento(Date data, ArrayList<BeneficioPadrao> beneficiosPadrao, boolean status) {
+	public BeneficioLancamento(Date data, boolean status) {
 		this.data = data;
-		this.beneficioPadrao = beneficiosPadrao;
 		this.status=status;
 	}
 	
-	public BeneficioLancamento(Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao, boolean status) {
+	public BeneficioLancamento(Integer id, Date data, boolean status) {
 		this.id = id;
 		this.data = data;
-		this.beneficioPadrao = beneficiosPadrao;
 		this.status=status;
 	}
 	
@@ -71,11 +66,5 @@ public class BeneficioLancamento {
 	}
 	public void setData(Date data) {
 		this.data = data;
-	}
-	public List<BeneficioPadrao> getBeneficiosPadrao() {
-		return beneficioPadrao;
-	}
-	public void setBeneficios(ArrayList<BeneficioPadrao> beneficiosPadrao) {
-		this.beneficioPadrao = beneficiosPadrao;
 	}
 }

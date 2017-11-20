@@ -25,12 +25,18 @@
     </plugins>
   </build>
   <dependencies>
+  		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	<dependency>
 	    <groupId>com.sun.faces</groupId>
 	    <artifactId>jsf-api</artifactId>
 	    <version>2.2.13</version>
 	</dependency>
 	<dependency>
+	
 	    <groupId>com.sun.faces</groupId>
 	    <artifactId>jsf-impl</artifactId>
 	    <version>2.2.13</version>
@@ -76,5 +82,35 @@
 	     <artifactId>slf4j-simple</artifactId>
 	     <version>1.5.6</version>
 	</dependency>
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
   </dependencies>
 </project>

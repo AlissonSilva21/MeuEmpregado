@@ -21,17 +21,17 @@ public class BeneficioLancamentoService {
 	}
 	
 	
-	public boolean cadastrar (Date data, ArrayList<BeneficioPadrao> beneficiosPadrao,boolean status) {		
+	public boolean cadastrar (Date data,boolean status) {		
 		
-		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(data, beneficiosPadrao,status);
+		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(data,status);
 				
 		return dao.cadastrar(beneficioLancamento);
 	}
 	
 	
-	public boolean atualizar (Integer id, Date data, ArrayList<BeneficioPadrao> beneficiosPadrao,boolean status) {		
+	public boolean atualizar (Integer id, Date data,boolean status) {		
 		
-		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, beneficiosPadrao,status);
+		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, status);
 				
 		return dao.atualizar(beneficioLancamento);
 	}

@@ -9,6 +9,7 @@ import com.edu.facear.model.Beneficio;
 import com.edu.facear.model.BeneficioLancado;
 import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPeriodo;
+import com.edu.facear.model.Empregado;
 
 public class BeneficioLancadoService {
 	private BeneficioLancadoDAO dao;
@@ -38,7 +39,11 @@ public class BeneficioLancadoService {
 		
 		return dao.listar();
 	}
-	
+/*	public List<BeneficioLancado> listarPorEmpregado(Empregado empregado) {
+		
+		return dao.listarPorEmpregado(empregado);
+	}
+	*/
 	public boolean deletar (Integer id) {
 			
 		return dao.deletar(id);

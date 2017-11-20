@@ -21,7 +21,6 @@ public class BeneficioPadraoService {
 	
 	
 	public boolean cadastrar (double descReal, double valorBeneficio, float descPorCento, BeneficioPeriodo beneficioPeriodo,Beneficio beneficio,Empregado empregado) {		
-		
 		BeneficioPadrao beneficioPadrao = new BeneficioPadrao(descReal, valorBeneficio,  descPorCento, beneficioPeriodo,beneficio,empregado);
 				
 		return dao.cadastrar(beneficioPadrao);
