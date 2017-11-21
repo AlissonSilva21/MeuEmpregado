@@ -71,8 +71,14 @@ public class BeneficioPadraoManagedBean implements Serializable {
 		beneficioPadrao = new BeneficioPadrao();
 
 		beneficioPadraoService = new BeneficioPadraoService();
-
+		//listaBeneficiosPadrao=beneficioPadraoService.listarPorEmpregado();
 		listaBeneficiosPadrao = beneficioPadraoService.listar();
+		
+		idBeneficio = listaBeneficios.get(0).getId();
+		setIdBeneficio(idBeneficio);
+		
+		idPeriodo = listaPeriodos.get(0).getId();
+		setIdPeriodo(idPeriodo);
 
 	}
 
@@ -83,8 +89,8 @@ public class BeneficioPadraoManagedBean implements Serializable {
 		if (valueButton.equals("Incluir")) {
 			BeneficioPeriodo beneficioPeriodo=new BeneficioPeriodo(idPeriodo);
 			Beneficio beneficio=new Beneficio(idBeneficio);
-			empregado=new Empregado(idEmpregado);
-			
+			empregado=new Empregado(empregadoQ.getId());
+			System.out.println("Perido:"+idPeriodo+"Bene:"+idBeneficio+"EMpre:"+empregadoQ.getId());
 			if(beneficioPadraoService.cadastrar(beneficioPadrao.getDescReal(), beneficioPadrao.getValorBeneficio(), beneficioPadrao.getDescPorCento(), beneficioPeriodo, beneficio,empregado)) {
 				beneficioPadrao = new BeneficioPadrao();
 				valorAux = "0,00";

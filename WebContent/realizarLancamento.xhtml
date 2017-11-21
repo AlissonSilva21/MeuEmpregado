@@ -7,21 +7,22 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="description" content="" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>Realizar Lançamento</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/style.css" />
-</head>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Benefício Lançamento</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
 
 <h:body>
 	<h:panelGroup class="container">
 		<h3 style="margin-top: 30px; color: #337AB7; margin-left: 43%">
-			<b>Lançamento de Beneficios</b>
+			<b>Benefício Lançamento</b>
 		</h3>
 		<h4 style="margin-top: 30px; color: #337AB7">
 			<b>Empregado</b>
@@ -33,21 +34,27 @@
 				<h:panelGroup class="form-group">
 					<label for="funcionario">Nome</label>
 					<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
-						id="funcionario" value="#{inicioBeneficioManagedBean.empregadoAux.nome_completo}" readonly="true" />
+						id="funcionario"
+						value="#{inicioBeneficioManagedBean.empregadoAux.nome_completo}"
+						readonly="true" />
 				</h:panelGroup>
 			</h:panelGroup>
 			<h:panelGroup class="col-md-4">
 				<h:panelGroup class="form-group">
 					<label for="id">ID</label>
 					<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0" id="id"
-						placeholder="ID" value="#{inicioBeneficioManagedBean.empregadoAux.id}" readonly="true" />
+						placeholder="ID"
+						value="#{inicioBeneficioManagedBean.empregadoAux.id}"
+						readonly="true" />
 				</h:panelGroup>
 			</h:panelGroup>
 			<h:panelGroup class="col-md-4">
 				<h:panelGroup class="form-group">
 					<label for="cpf">CPF</label>
 					<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
-						id="cpf" placeholder="CPF" value="#{inicioBeneficioManagedBean.empregadoAux.cpf}" readonly="true" />
+						id="cpf" placeholder="CPF"
+						value="#{inicioBeneficioManagedBean.empregadoAux.cpf}"
+						readonly="true" />
 				</h:panelGroup>
 			</h:panelGroup>
 		</h:panelGroup>
@@ -58,16 +65,20 @@
 		<h:form>
 			<h:panelGroup class="row">
 				<h:panelGroup class="col-md-6">
-				
+
 					<label for="cmbBeneficio">Benefício</label>
-					<h:selectOneMenu styleClass="form-control" value="#{beneficioLancamentoManagedBean.idBeneficio}">		
-						<f:ajax event="change" render="cmbBeneficio" listener="#{beneficioLancamentoManagedBean.setIdBeneficio}"/>
-						<f:selectItems value="#{beneficioLancamentoManagedBean.listaBeneficios}" var="b" itemValue="#{b.id}" itemLabel="#{b.descricao}" />	
+					<h:selectOneMenu styleClass="form-control"
+						value="#{beneficioLancamentoManagedBean.idBeneficio}">
+						<f:ajax event="change" render="cmbBeneficio"
+							listener="#{beneficioLancamentoManagedBean.setIdBeneficio}" />
+						<f:selectItems
+							value="#{beneficioLancamentoManagedBean.listaBeneficios}" var="b"
+							itemValue="#{b.id}" itemLabel="#{b.descricao}" />
 					</h:selectOneMenu>
-					
-					
+
+
 				</h:panelGroup>
-				
+
 				<h:panelGroup class="col-md-4">
 					<h:panelGroup class="form-group">
 						<label for="valor">Valor R$</label>
@@ -81,7 +92,7 @@
 					</h:panelGroup>
 				</h:panelGroup>
 			</h:panelGroup>
-		
+
 			<h:panelGroup class="row">
 				<h:panelGroup class="col-md-4">
 
@@ -89,9 +100,12 @@
 
 					<label for="cmbPeriodo">Período</label>
 					<h:selectOneMenu styleClass="form-control" id="cmbPeriodo"
-						value="#{beneficioPadraoManagedBean.idPeriodo}">
-						<f:ajax event="change" render="cmbPeriodo" listener="#{beneficioLancamentoManagedBean.setIdPeriodo}"/>
-						<f:selectItems value="#{beneficioLancamentoManagedBean.listaPeriodos}" var="p" itemValue="#{p.id}" itemLabel="#{p.descricao}" />
+						value="#{beneficioLancamentoManagedBean.idPeriodo}">
+						<f:ajax event="change" render="cmbPeriodo"
+							listener="#{beneficioLancamentoManagedBean.setIdPeriodo}" />
+						<f:selectItems
+							value="#{beneficioLancamentoManagedBean.listaPeriodos}" var="p"
+							itemValue="#{p.id}" itemLabel="#{p.descricao}" />
 					</h:selectOneMenu>
 
 
@@ -131,93 +145,27 @@
 
 				<h:panelGroup class="col-md-2">
 					<h:commandButton styleClass="btn btn-success btn-incluir btn-block"
-						style="margin-top: 25px" value="Inserir"
-						id="btnIncluir" action="#{beneficioLancamentoManagedBean.cadastrarBeneficioAction}">
+						style="margin-top: 25px" value="Incluir" id="btnIncluir">
+						<f:ajax
+							listener="#{beneficioLancamentoManagedBean.cadastrarBeneficioAction}"
+							render="@form formListaBeneficiosPadrao" />
 					</h:commandButton>
 				</h:panelGroup>
 			</h:panelGroup>
 		</h:form>
 
-			<h:form id="formListaBeneficiosPadrao">
+
+
+
+
+		<h:form id="formListaBeneficiosPadrao">
 			<h4 class="h4-subtitulos">
-				<b>Lista de Benefícios Padrão</b>
+				<b>Lista de Lançamento de Beneficios</b>
 			</h4>
-			<h:dataTable styleClass="table table-striped"
-				id="tableBeneficiosPadrao" var="b"
-				value="#{beneficioLancamentoManagedBean.listaBeneficiosPadrao}"
-				style="margin-left: 15px; margin-right: 15px;">
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="ID" />
-					</f:facet>
-					<h:outputText value="#{b.id}" />
-				</h:column>
-
-
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="Descrição" />
-					</f:facet>
-					<h:outputText value="#{b.beneficio.descricao}" />
-				</h:column>
-
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="Desc %" />
-					</f:facet>
-					<h:outputText value="#{b.descPorCento}" />
-				</h:column>
-
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="Desc R$" />
-					</f:facet>
-					<h:outputText value="#{b.descReal}" />
-				</h:column>
-
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="Valor R$" />
-					</f:facet>
-					<h:outputText value="#{b.valorBeneficio}" />
-				</h:column>
-
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="Período" />
-					</f:facet>
-					<h:outputText value="#{b.beneficioPeriodo.descricao}" />
-				</h:column>
-
-				<h:column>
-					<h:commandLink value="Lançar Beneficio Padrão"
-						action="#{beneficioLancamentoManagedBean.lancarBeneficioAction}">
-						<f:setPropertyActionListener
-							target="#{beneficioLancamentoManagedBean.idAux}" value="#{b.id}" />
-					</h:commandLink>
-				</h:column>
-			</h:dataTable>
-		</h:form>
-		
-		<h:form id="formListaLancamento">
-			<h4 class="h4-subtitulos">
-				<b>Beneficios Lançamento</b>
-			</h4>
-			<h:dataTable styleClass="table table-striped"
-				id="tableBeneficiosLancamento" var="b"
+			<h:dataTable styleClass="table table-striped" id="tableBeneficios"
+				var="b"
 				value="#{beneficioLancamentoManagedBean.listaBeneficioLancado}"
 				style="margin-left: 15px; margin-right: 15px;">
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="ID" />
-					</f:facet>
-					<h:outputText value="#{b.id}" />
-				</h:column>
 
 				<h:column>
 					<f:facet name="header">
@@ -259,24 +207,36 @@
 				</h:column>
 
 				<h:column>
-					<h:commandLink value="Excluir" action="#{beneficioLancamentoManagedBean.excluirBeneficioLancamentoAction}">
-						<f:setPropertyActionListener
-							target="#{beneficioLancamentoManagedBean.beneficioLancadodel}" value="#{b}"/>
-					</h:commandLink >
+					<h:commandLink value="Excluir">
+					<f:setPropertyActionListener
+							target="#{beneficioLancamentoManagedBean.bendel}" value="#{b}" />
+						<p:ajax
+							listener="#{beneficioLancamentoManagedBean.deletarBeneficioAction}"
+							update="@form formListaBeneficiosPadrao" />
+					</h:commandLink>
 				</h:column>
+
 			</h:dataTable>
 		</h:form>
 
+		
 	</h:panelGroup>
-	
-	
+
 	<h:form>
+	<h:panelGroup class="col-md-2">
+			<h:commandButton styleClass="btn btn-success btn-incluir btn-block"
+				style="margin-top: 25px" value="Realizar Lançamento" id="btnIncluir">
+				<f:ajax
+					listener="#{beneficioLancamentoManagedBean.realizarLancamento(inicioBeneficioManagedBean.empregadoAux)}"
+					render="@form formListaBeneficiosPadrao" />
+			</h:commandButton>
+		</h:panelGroup>
 		<h:panelGroup class="col-md-12">
 			<h:commandLink styleClass="btn btn-danger btn-incluir float-left"
-				style="margin-top: 25px"
-				value="Voltar" action="inicioBeneficio?faces-redirect=true"/>
+				style="margin-top: 25px" value="Voltar"
+				action="inicioBeneficio?faces-redirect=true" />
 		</h:panelGroup>
-		</h:form>
+	</h:form>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/scripts.js"></script>

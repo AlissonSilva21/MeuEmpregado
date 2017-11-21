@@ -23,25 +23,33 @@ public class BeneficioLancamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id",unique=true,nullable=false)
 	private Integer id;
-	private Date data;
+	private String data;
 	
 	@OneToOne
 	@JoinColumn(name="idEmpregado")
 	private Empregado empregado;
 	
+	@OneToOne
+	@JoinColumn(name="idEmpregador")
+	private Empregador empregador;
+
 	private boolean status;
 	
 	public BeneficioLancamento(){}
 	
-	public BeneficioLancamento(Date data, boolean status) {
+	public BeneficioLancamento(String data, boolean status, Empregado empregado,Empregador empregador) {
 		this.data = data;
 		this.status=status;
+		this.empregado=empregado;
+		this.empregador=empregador;
 	}
 	
-	public BeneficioLancamento(Integer id, Date data, boolean status) {
+	public BeneficioLancamento(Integer id, String data, boolean status, Empregado empregado,Empregador empregador) {
 		this.id = id;
 		this.data = data;
 		this.status=status;
+		this.empregado=empregado;
+		this.empregador=empregador;
 	}
 	
 	
@@ -61,10 +69,24 @@ public class BeneficioLancamento {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
+	}
+	public Empregado getEmpregado() {
+		return empregado;
+	}
+
+	public void setEmpregado(Empregado empregado) {
+		this.empregado = empregado;
+	}
+	public Empregador getEmpregador() {
+		return empregador;
+	}
+
+	public void setEmpregador(Empregador empregador) {
+		this.empregador = empregador;
 	}
 }

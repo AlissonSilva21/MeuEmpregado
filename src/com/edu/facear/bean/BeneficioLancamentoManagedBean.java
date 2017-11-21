@@ -1,7 +1,9 @@
 package com.edu.facear.bean;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,6 +15,7 @@ import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPadrao;
 import com.edu.facear.model.BeneficioPeriodo;
 import com.edu.facear.model.Empregado;
+import com.edu.facear.model.Empregador;
 import com.edu.facear.service.BeneficioLancadoService;
 import com.edu.facear.service.BeneficioLancamentoService;
 import com.edu.facear.service.BeneficioPadraoService;
@@ -20,6 +23,7 @@ import com.edu.facear.service.BeneficioPeriodoService;
 import com.edu.facear.service.BeneficioService;
 import com.edu.facear.service.EmpregadoService;
 import com.edu.facear.service.ListarEmpregadosService;
+import com.edu.facear.service.LoginService;
 
 @ManagedBean(name = "beneficioLancamentoManagedBean")
 @SessionScoped
@@ -52,7 +56,7 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 	private int idPeriodo;
 	private Empregado empregado;
 	private int idEmpregado;
-	
+	private BeneficioLancado bendel;
 	private int idAux;
 	
 	private int idLancamento;
@@ -76,38 +80,76 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 
 		beneficioPadrao = new BeneficioPadrao();
 		beneficioPadraoService = new BeneficioPadraoService();
+		//listaBeneficiosPadrao=beneficioPadraoService.listarPorEmpregado();
 		listaBeneficiosPadrao = beneficioPadraoService.listar();
 		
+		idBeneficio = listaBeneficios.get(0).getId();
+		setIdBeneficio(idBeneficio);
+		
+		idPeriodo = listaPeriodos.get(0).getId();
+		setIdPeriodo(idPeriodo);
+		
+		for(int i=0;i<listaBeneficiosPadrao.size();i++){
+			beneficioLancado = new BeneficioLancado(listaBeneficiosPadrao.get(i).getValorBeneficio(), 
+					listaBeneficiosPadrao.get(i).getDescReal(), listaBeneficiosPadrao.get(i).getDescPorCento(),
+					listaBeneficiosPadrao.get(i).getBeneficio(), listaBeneficiosPadrao.get(i).getBeneficioPeriodo(), null);
+			listaBeneficioLancado.add(beneficioLancado);
+		}
 		beneficioLancamentoService = new BeneficioLancamentoService();
 		
 	}
-
-	public void lancarBeneficioAction() {
-		System.out.println(1);
-		for(int i=0;i<listaBeneficiosPadrao.size();i++){
-			if(listaBeneficiosPadrao.get(i).getId()==idAux){
-				BeneficioLancado beneficio=new BeneficioLancado(listaBeneficiosPadrao.get(i).getValorBeneficio(),listaBeneficiosPadrao.get(i).getDescReal(), listaBeneficiosPadrao.get(i).getDescPorCento(),listaBeneficiosPadrao.get(i).getBeneficio(),listaBeneficiosPadrao.get(i).getBeneficioPeriodo(),null);
-				listaBeneficioLancado.add(beneficio);
+	
+	public void cadastrarBeneficioAction(){
+		
+		Beneficio beneficio=new Beneficio();
+		BeneficioPeriodo beneficioPeriodo=new BeneficioPeriodo();
+		for(int i=0;i<listaBeneficios.size();i++){
+			if(listaBeneficios.get(i).getId()==idBeneficio){
+				beneficio=listaBeneficios.get(i);
 			}
 		}
-		
+		for(int i=0;i<listaPeriodos.size();i++){
+			if(listaPeriodos.get(i).getId()==idPeriodo){
+				beneficioPeriodo=listaPeriodos.get(i);
+			}
+		}
+		beneficioLancado.setBeneficio(beneficio);
+		beneficioLancado.setBeneficioPeriodo(beneficioPeriodo);
+		atualizaLista();
+		valorAux="0.0";
+		valorDescAux="0.0";
+		beneficioLancado = new BeneficioLancado();
 	}
-	public void excluirBeneficioLancamentoAction() {
+	public void atualizaLista(){
+		listaBeneficioLancado.add(beneficioLancado);
+	}
+	public void deletarBeneficioAction(){
 		for(int i=0;i<listaBeneficioLancado.size();i++){
-			if(listaBeneficioLancado.get(i).equals(beneficioLancadodel)){
+			if(listaBeneficioLancado.get(i).equals(bendel)){
 				listaBeneficioLancado.remove(i);
 			}
 		}
-
 	}
-	
-	public void cadastrarBeneficioAction() {
-		BeneficioPeriodo beneficioPeriodo=new BeneficioPeriodo(idPeriodo);
-		Beneficio beneficio=new Beneficio(idBeneficio);
-		BeneficioLancado beneficioLan=new BeneficioLancado(beneficioPadrao.getValorBeneficio(),beneficioPadrao.getDescReal(), beneficioPadrao.getDescPorCento(),beneficio,beneficioPeriodo,null);
-		listaBeneficioLancado.add(beneficioLan);	
+	public void realizarLancamento(Empregado empregadoax){
+		int id;
+		SimpleDateFormat Format=new SimpleDateFormat("yyyy-MM-dd");
+		Date data=new Date();
+		LoginService service=new LoginService();
+		Empregador empregador=new Empregador(service.getIdEmpregadorlogin());
+		BeneficioLancamentoService lancamento=new BeneficioLancamentoService();
+		lancamento.cadastrar("2017-11-21", true, empregadoax, empregador);
+		id=lancamento.proxId();
+		BeneficioLancadoService lanService=new BeneficioLancadoService();
+		BeneficioLancamento beneficioLancamento=new BeneficioLancamento(id);
+		for(int i=0;i<listaBeneficioLancado.size();i++){
+			listaBeneficioLancado.get(i).setBeneficioLancamento(beneficioLancamento);
+			lanService.cadastrar(listaBeneficioLancado.get(i).getValor(),listaBeneficioLancado.get(i).getDescontoReal(),
+					listaBeneficioLancado.get(i).getDescontoPorCento(), listaBeneficioLancado.get(i).getBeneficio(),
+					listaBeneficioLancado.get(i).getBeneficioPeriodo(), listaBeneficioLancado.get(i).getBeneficioLancamento());
+		}
+		
+		listaBeneficioLancado.clear();
 	}
-
 	public void setIdBeneficio() {
 		beneficioPadrao.getBeneficio().setId(idBeneficio);
 	}
@@ -249,8 +291,8 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 				}
 
 				valorDescAux = palavra;
-				beneficioPadrao.setDescPorCento(Float.parseFloat(palavra));
-				beneficioPadrao.setDescReal(0);
+				beneficioLancado.setDescontoPorCento(Float.parseFloat(palavra));
+				beneficioLancado.setDescontoReal(0.0);
 
 			} else {
 				valorDescAux = palavra;
@@ -262,8 +304,8 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 
 				palavra = palavra.replaceAll(",", ".");
 
-				beneficioPadrao.setDescReal(Float.parseFloat(palavra));
-				beneficioPadrao.setDescPorCento(0);
+				beneficioLancado.setDescontoReal(Double.valueOf(palavra));
+				beneficioLancado.setDescontoPorCento(Float.valueOf(0));
 
 			}
 
@@ -313,7 +355,7 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 
 			palavra = palavra.replaceAll(",", ".");
 
-			beneficioPadrao.setValorBeneficio(Float.parseFloat(palavra));
+			beneficioLancado.setValor(Double.valueOf(palavra));
 
 		}
 
@@ -380,6 +422,14 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 
 	public void setIdPeriodo(int idPeriodo) {
 		this.idPeriodo = idPeriodo;
+	}
+
+	public BeneficioLancado getBendel() {
+		return bendel;
+	}
+
+	public void setBendel(BeneficioLancado bendel) {
+		this.bendel = bendel;
 	}
 
 }

@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
-<head>
+<h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="description" content="" />
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <title>Visualizar Lancamentos</title>
-</head>
+</h:head>
 <h:body>
 	<h3 style="margin-top: 30px; color: #337AB7; margin-left: 43%">
 		<b>Visualizar Lançamento</b>
@@ -25,113 +25,141 @@
 		<h:panelGroup class="row">
 			<h:panelGroup class="col-md-2">
 				<h:panelGroup class="form-group">
-				<h:outputLabel value="Nome" />
-				<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"	id="nome" value="#{listaLancamentoManagedBean.nome}">
-				</h:inputText>
+					<h:outputLabel value="Nome" />
+					<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+						id="nome" value="#{listaLancamentoManagedBean.nome}">
+						<f:ajax event="keyup"
+									listener="#{listaLancamentoManagedBean.buscar}"
+									render="formLancamentos formBeneficioLancado" />
+					</h:inputText>
 				</h:panelGroup>
 			</h:panelGroup>
 			<h:panelGroup class="col-md-2">
 				<h:panelGroup class="form-group">
-				<h:outputLabel value="CPF" />
-				<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"	id="cpf" value="#{listaLancamentoManagedBean.cpf}">
-				</h:inputText>
+					<h:outputLabel value="CPF" />
+					<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+						id="cpf" value="#{listaLancamentoManagedBean.cpf}">
+						<f:ajax event="keyup"
+									listener="#{listaLancamentoManagedBean.buscar}"
+									render="formLancamentos formBeneficioLancado" />
+					</h:inputText>
 				</h:panelGroup>
 			</h:panelGroup>
 			<h:panelGroup class="col-md-2">
-				<h:commandButton value="Buscar"
-					action="#{listaLancamentoManagedBean.buscar}" style="margin : 30px">
-					<f:setPropertyActionListener
-					target="#{listaLancamentoManagedBean.nome}" value="#{listaLancamentoManagedBean.nome}" />
-					<f:setPropertyActionListener
-					target="#{listaLancamentoManagedBean.cpf}" value="#{listaLancamentoManagedBean.cpf}" />
-					
-				</h:commandButton>
+				<h:panelGroup class="form-group">
+					<h:outputLabel value="Data" />
+					<h:inputText styleClass="form-control mb-4 mr-sm-4 mb-sm-0"
+						id="data" value="#{listaLancamentoManagedBean.data}">
+						<f:ajax event="keyup"
+									listener="#{listaLancamentoManagedBean.buscar}"
+									render="formLancamentos formBeneficioLancado" />
+					</h:inputText>
+				</h:panelGroup>
 			</h:panelGroup>
+			
 		</h:panelGroup>
 	</h:form>
 	<h4 style="margin-top: 30px; color: #337AB7">
 		<b>Empregado</b>
 	</h4>
-		<form>
-		  <h:dataTable styleClass="table table-striped" var="i"
-				value="#{listaLancamentoManagedBean.listaLancamento}" id="tblBeneficioLancamento">
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>#</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{i.id}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Empregado</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{i.empregado.nome_completo }" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>CPF</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{i.empregado.cpf }" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Data Lancamento</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{i.data}" />
-				</h:column>
-			</h:dataTable>
+
+	<h:form id="formLancamentos">
+		<h:dataTable styleClass="table table-striped" var="i"
+			value="#{listaLancamentoManagedBean.listaLancamento}"
+			id="tblBeneficioLancamento">
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>#</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{i.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Empregado</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{i.empregado.nome_completo}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>CPF</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{i.empregado.cpf}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Data Lancamento</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{i.data}" />
+			</h:column>
+			<h:column>
+				<h:commandLink value="Visualizar" action="#{listaLancamentoManagedBean.listarBeneficiosLancados(i.id)}"/>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+
+
+	<h:form id="formBeneficioLancado">
 		<h4 style="margin-top: 30px; color: #337AB7">
-		<b>Beneficios</b>
+			<b>Beneficios</b>
 		</h4>
-		  <h:dataTable styleClass="table table-striped" var="j"
-				value="#{listaLancamentoManagedBean.listaBeneficioLancado}" id="tblBeneficioLancado">
+		<h:dataTable styleClass="table table-striped" var="j"
+			value="#{listaLancamentoManagedBean.listaBeneficioLancado}"
+			id="tblBeneficioLancado">
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>#</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{j.id}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Lançamento</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{j.beneficioLancamento.id}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Periodo</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{j.beneficioPeriodo.descricao}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Beneficio</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{j.beneficio.descricao}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Valor R$</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{j.descontoReal}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel>Valor %</h:outputLabel>
-					</f:facet>
-					<h:outputText value="#{j.descontoPorCento}" />
-				</h:column>
-			</h:dataTable>
-		</form>
-		<h:form>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>#</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Lançamento</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.beneficioLancamento.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Periodo</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.beneficioPeriodo.descricao}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Beneficio</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.beneficio.descricao}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Valor R$</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.valor}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Desconto %</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.descontoPorCento}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel>Desconto R$</h:outputLabel>
+				</f:facet>
+				<h:outputText value="#{j.descontoReal}" />
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	<h:form>
 		<h:panelGroup class="col-md-12">
 			<h:commandLink styleClass="btn btn-danger btn-incluir float-left"
-				style="margin-top: 25px"
-				value="Voltar" action="inicioBeneficio?faces-redirect=true"/>
+				style="margin-top: 25px" value="Voltar"
+				action="inicioBeneficio?faces-redirect=true" />
 		</h:panelGroup>
-		</h:form>
+	</h:form>
 
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

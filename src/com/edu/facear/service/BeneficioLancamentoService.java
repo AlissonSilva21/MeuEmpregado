@@ -9,6 +9,8 @@ import com.edu.facear.dao.BeneficioLancamentoDAO;
 import com.edu.facear.model.Beneficio;
 import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPadrao;
+import com.edu.facear.model.Empregado;
+import com.edu.facear.model.Empregador;
 
 public class BeneficioLancamentoService {
 	
@@ -21,17 +23,17 @@ public class BeneficioLancamentoService {
 	}
 	
 	
-	public boolean cadastrar (Date data,boolean status) {		
+	public boolean cadastrar (String data,boolean status, Empregado empregado,Empregador empregador) {		
 		
-		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(data,status);
+		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(data,status,empregado,empregador);
 				
 		return dao.cadastrar(beneficioLancamento);
 	}
 	
 	
-	public boolean atualizar (Integer id, Date data,boolean status) {		
+	public boolean atualizar (Integer id, String data,boolean status, Empregado empregado,Empregador empregador) {		
 		
-		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, status);
+		BeneficioLancamento beneficioLancamento = new BeneficioLancamento(id, data, status,empregado,empregador);
 				
 		return dao.atualizar(beneficioLancamento);
 	}
@@ -42,6 +44,9 @@ public class BeneficioLancamentoService {
 		return dao.listar();
 	}
 	
+	public List<BeneficioLancamento> listaProEmpregador(){
+		return dao.listarPorEmpregador();
+	}
 	
 	public boolean deletar (Integer id) {
 			

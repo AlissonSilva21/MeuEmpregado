@@ -2,9 +2,13 @@ package com.edu.facear.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import com.edu.facear.dao.BeneficioDAO;
 import com.edu.facear.dao.BeneficioPadraoDAO;
 import com.edu.facear.model.Beneficio;
+import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPadrao;
 import com.edu.facear.model.BeneficioPeriodo;
 import com.edu.facear.model.Empregado;
@@ -37,6 +41,10 @@ public class BeneficioPadraoService {
 	public List<BeneficioPadrao> listar () {
 		
 		return dao.listar();
+	}
+	
+	public List<BeneficioPadrao> listarPorEmpregado(){
+		return dao.listarPorEmpregado();
 	}
 	
 	

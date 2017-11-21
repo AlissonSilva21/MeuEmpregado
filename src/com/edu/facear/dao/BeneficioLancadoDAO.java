@@ -12,15 +12,15 @@ import com.edu.facear.model.Beneficio;
 import com.edu.facear.model.BeneficioLancado;
 import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPeriodo;
-import com.edu.facear.model.Empregado;
 
 
 public class BeneficioLancadoDAO {
 	EntityManagerFactory emf = Conexao.getInstance();
 	public List<BeneficioLancado> listar() {
-		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("from BeneficioLancado");
-		return q.getResultList();
+		EntityManager em = Conexao.getInstance().createEntityManager();
+		return em.createQuery("FROM "+BeneficioLancado.class.getName()).getResultList();
+		
+		
 	}
 	public boolean deletar(Integer id) {
 		EntityManager em = emf.createEntityManager();
@@ -58,6 +58,13 @@ public class BeneficioLancadoDAO {
 		lista.addAll(em.createQuery("FROM " + BeneficioLancado.class.getName()).getResultList());
 		id=lista.get(lista.size()-1).getId()+1;
 		return id;
+	}
+	
+	public List<BeneficioLancado> listarPorID(Integer id) {
+		EntityManager em = Conexao.getInstance().createEntityManager();
+		return em.createQuery("FROM "+BeneficioLancado.class.getName() +" WHERE idbeneficioLancamento = "+id).getResultList();
+		
+		
 	}
 
 }

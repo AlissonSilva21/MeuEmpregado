@@ -15,12 +15,14 @@ import com.edu.facear.model.Beneficio;
 import com.edu.facear.model.BeneficioLancamento;
 import com.edu.facear.model.BeneficioPadrao;
 import com.edu.facear.model.BeneficioPeriodo;
+import com.edu.facear.service.LoginService;
 
 
 
 
 public class BeneficioPadraoDAO{
 	EntityManagerFactory emf = Conexao.getInstance();
+	LoginService service = new LoginService();
 	public List<BeneficioPadrao> listar() {
 		EntityManager em = emf.createEntityManager();
 		Query q = em.createQuery("from BeneficioPadrao");
@@ -64,6 +66,19 @@ public class BeneficioPadraoDAO{
 		lista.addAll(em.createQuery("FROM " + BeneficioPadrao.class.getName()).getResultList());
 		id=lista.get(lista.size()-1).getId()+1;
 		return id;
+	}
+	public List<BeneficioPadrao> listarPorEmpregado(){
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		
+		Query q = em.createQuery("SELECT e FROM BeneficioPadrao m WHERE m.idEmpregado = ?");//select tb_empregado.*, tb_empregador.idEmpregador from tb_empregado inner join tb_mensagem on tb_empregado.id=tb_mensagem.idEmpregado inner join tb_empregador on tb_mensagem.idEmpregador=tb_empregador.idEmpregador where tb_empregador.idEmpregador = 2;
+		q.setParameter(0, service.getIdEmpregadologin());
+		
+		em.getTransaction().commit();
+		//em.close();
+		
+		return q.getResultList();
 	}
 
 }
