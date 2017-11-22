@@ -23,6 +23,8 @@ public class BeneficioManagedBean implements Serializable {
 
 	private Beneficio beneficio;
 	
+	private int idBeneficio;
+
 
 	private boolean dialogVisible = false;
 
@@ -50,7 +52,7 @@ public class BeneficioManagedBean implements Serializable {
 
 	public void excluirBeneficioAction() {
 
-		if (beneficioService.deletar(beneficio.getId())) {
+		if (beneficioService.deletar(idBeneficio)) {
 			titleDialog = "Benefício excluído com sucesso!";
 			textDialog = "";
 			dialogVisible = false;
@@ -195,6 +197,13 @@ public class BeneficioManagedBean implements Serializable {
 
 	public void setValueButton(String valueButton) {
 		this.valueButton = valueButton;
+	}
+	public int getIdBeneficio() {
+		return idBeneficio;
+	}
+
+	public void setIdBeneficio(int idBeneficio) {
+		this.idBeneficio = idBeneficio;
 	}
 
 }

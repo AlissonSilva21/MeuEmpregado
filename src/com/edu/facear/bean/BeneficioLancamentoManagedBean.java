@@ -135,7 +135,7 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 		SimpleDateFormat Format=new SimpleDateFormat("yyyy-MM-dd");
 		Date data=new Date();
 		LoginService service=new LoginService();
-		Empregador empregador=new Empregador(service.getIdEmpregadorlogin());
+		Empregador empregador=new Empregador(1);//(service.getIdEmpregadorlogin());
 		BeneficioLancamentoService lancamento=new BeneficioLancamentoService();
 		lancamento.cadastrar("2017-11-21", true, empregadoax, empregador);
 		id=lancamento.proxId();

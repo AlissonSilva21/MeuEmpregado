@@ -125,7 +125,7 @@
 						<h:commandLink value="Excluir"
 							action="#{beneficioManagedBean.showDialog}">
 							<f:setPropertyActionListener
-								target="#{beneficioManagedBean.beneficio}" value="#{b}" />
+								target="#{beneficioManagedBean.idBeneficio}" value="#{b.id}" />
 							<f:setPropertyActionListener
 								target="#{beneficioManagedBean.titleDialog}"
 								value="O benefício será excluído permanentemente" />

@@ -66,7 +66,7 @@ public class BeneficioLancamentoDAO{
 		EntityManager em = Conexao.getInstance().createEntityManager();
 		ArrayList<BeneficioLancamento> lista=new ArrayList<BeneficioLancamento>();
 		lista.addAll(em.createQuery("FROM " + BeneficioLancamento.class.getName()).getResultList());
-		id=lista.get(lista.size()).getId();
+		id=lista.get(lista.size()-1).getId();
 		return id;
 	}
 	public List<BeneficioLancamento> listarPorEmpregador(){
