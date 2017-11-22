@@ -21,7 +21,6 @@ public class BeneficioService {
 		Beneficio beneficio = new Beneficio(descricao,empregador);		
 		return dao.cadastrar(beneficio);
 	}
-	
 	public boolean atualizar (Integer id, String descricao,Empregador empregador) {	
 		
 		Beneficio beneficio=new Beneficio(id, descricao,empregador);

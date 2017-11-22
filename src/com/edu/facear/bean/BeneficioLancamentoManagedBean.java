@@ -137,7 +137,7 @@ public class BeneficioLancamentoManagedBean implements Serializable{
 		LoginService service=new LoginService();
 		Empregador empregador=new Empregador(1);//(service.getIdEmpregadorlogin());
 		BeneficioLancamentoService lancamento=new BeneficioLancamentoService();
-		lancamento.cadastrar("2017-11-21", true, empregadoax, empregador);
+		lancamento.cadastrar(Format.format(data.getTime()), true, empregadoax, empregador);
 		id=lancamento.proxId();
 		BeneficioLancadoService lanService=new BeneficioLancadoService();
 		BeneficioLancamento beneficioLancamento=new BeneficioLancamento(id);

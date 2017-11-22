@@ -38,7 +38,6 @@ public class BeneficioDAO{
 		em.close();
 		return true;
 	}
-
 	public boolean atualizar(Beneficio beneficio) {
 		
 		EntityManager em = emf.createEntityManager();
